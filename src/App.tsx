@@ -6,9 +6,21 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const API_KEY = "jaFa+dzN8Ybhcx3X+b8kHA==qATAwCNJgRz4vsXr";
 
+function getRandomGradient() {
+  // Generate two random colors
+  const randomColor = () =>
+    `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")}`;
+  const color1 = randomColor();
+  const color2 = randomColor();
+  // Random angle
+  const angle = Math.floor(Math.random() * 360);
+  return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+}
+
 function App() {
   const [quote, setQuote] = useState({ quote: "", author: "" });
   const [loading, setLoading] = useState(false);
+  const [bg, setBg] = useState(getRandomGradient());
 
   // Fetch a new quote from the API
   const fetchNewQuote = async () => {
@@ -19,12 +31,14 @@ function App() {
       });
       const data = await response.json();
       setQuote({ quote: data[0].quote, author: data[0].author });
+      setBg(getRandomGradient()); // Change background on new quote
     } catch (error) {
       console.error("Error fetching quote:", error);
       setQuote({
         quote: "Oops! Couldn't fetch a quote.",
         author: "Unknown"
       });
+      setBg(getRandomGradient()); // Still change background on error
     } finally {
       setLoading(false);
     }
@@ -37,8 +51,18 @@ function App() {
 
   // Render the quote and buttons
   return (
-    <div className="max-w-sm w-full lg:max-w-full lg:flex">
-      <div id="quote-box">
+    <div
+      className="fixed inset-0 min-h-screen w-full flex items-center justify-center"
+      style={{
+        background: bg,
+        zIndex: 0,
+        transition: "background 0.7s ease"
+      }}
+    >
+      <div
+        id="quote-box"
+        className="relative bg-black/70 rounded-xl shadow-lg p-8 flex flex-col items-center z-10"
+      >
         {loading ? (
           <div className="flex flex-col items-center justify-center my-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mb-4"></div>
@@ -47,11 +71,11 @@ function App() {
         ) : (
           <>
             <p id="text" className="text-base mb-4">"{quote.quote}"</p>
-            <p id="author" className="font-bold text-xl mb-4">- {quote.author}</p>
+            <p id="author" className="font-bold text-xl mb-6">- {quote.author}</p>
           </>
         )}
 
-        <div className="buttons flex flex-row items-center gap-6 mt-4 justify-center">
+        <div className="buttons flex flex-row items-center gap-6 mt-2 justify-center">
           <button id="new-quote" onClick={fetchNewQuote} disabled={loading}>
             New Quote
           </button>
