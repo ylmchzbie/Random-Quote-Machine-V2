@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { FaEnvelope, FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaEnvelope, FaGithub, FaLinkedin, FaQuoteLeft, FaQuoteRight, FaXTwitter } from "react-icons/fa6";
 import LoadingThreeDotsPulse from "./LoadingThreeDotsPulse";
 import SplitText from "./SplitText";
 import Aurora from './Aurora';
@@ -72,10 +72,10 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="md:container mx-auto px-4 flex flex-wrap grid grid-row-2 gap-4">
+            <div className="md:container mx-auto px-4 flex flex-wrap grid grid-row-3 gap-4">
               <SplitText
                 text={quote.quote}
-                className="text-2xl font-semibold text-center justify-center-safe mb-4"
+                className="text-6xl font-semibold text-center justify-center-safe mb-4"
                 delay={20}
                 duration={0.6}
                 ease="power3.out"
@@ -87,18 +87,25 @@ function App() {
                 textAlign="center"
                 onLetterAnimationComplete={handleAnimationComplete}
               />
-              <h1 id="author" className="font-bold text-xl mb-6 drop-shadow-xl">{quote.author}</h1>
+              <p id="author" className="text-2xl font-regular mb-6">{quote.author}</p>
             </div>
           </>
         )}
 
         <div className="buttons flex flex-row items-center gap-6 mt-2 justify-center place-content-end-safe">
-          <button id="new-quote" className="text-white font-bold py-2 px-4 rounded-full" onClick={fetchNewQuote} disabled={loading}>
+          {/* Pill design for New Quote */}
+          <button
+            id="new-quote"
+            className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold py-2 px-6 rounded-full shadow-md transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            onClick={fetchNewQuote}
+            disabled={loading}
+          >
             New Quote
           </button>
+          {/* Stroke (outline) design for Share */}
           <a
             id="tweet-quote"
-            className="flex flex-row items-center gap-2"
+            className="flex flex-row items-center gap-2 border-2 border-white text-white font-bold py-2 px-6 rounded-full transition-all duration-200 hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${quote.quote}" - ${quote.author}`)}`}
             target="_blank"
             rel="noopener noreferrer"
