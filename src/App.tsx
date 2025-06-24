@@ -72,10 +72,10 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="md:container mx-auto px-4 flex flex-wrap grid grid-row-3 gap-4">
+            <div className="md:container mx-auto px-2 sm:px-4 flex flex-wrap grid grid-row-3 gap-2 sm:gap-4 w-full max-w-full sm:max-w-2xl">
               <SplitText
                 text={quote.quote}
-                className="text-6xl font-semibold text-center justify-center-safe mb-4"
+                className="text-2xl sm:text-4xl md:text-6xl font-semibold text-center justify-center-safe mb-2 sm:mb-4"
                 delay={20}
                 duration={0.6}
                 ease="power3.out"
@@ -87,16 +87,16 @@ function App() {
                 textAlign="center"
                 onLetterAnimationComplete={handleAnimationComplete}
               />
-              <p id="author" className="text-2xl font-regular mb-6">{quote.author}</p>
+              <p id="author" className="text-lg sm:text-2xl font-black mb-4 sm:mb-6">{quote.author}</p>
             </div>
           </>
         )}
 
-        <div className="buttons flex flex-row items-center gap-6 mt-2 justify-center place-content-end-safe">
+        <div className="buttons flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mt-2 justify-center w-full">
           {/* Pill design for New Quote */}
           <button
             id="new-quote"
-            className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold py-2 px-6 rounded-full shadow-md transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold py-2 px-4 sm:px-6 rounded-full shadow-md transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full sm:w-auto"
             onClick={fetchNewQuote}
             disabled={loading}
           >
@@ -105,7 +105,7 @@ function App() {
           {/* Stroke (outline) design for Share */}
           <a
             id="tweet-quote"
-            className="flex flex-row items-center gap-2 border-2 border-white text-white font-bold py-2 px-6 rounded-full transition-all duration-200 hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="flex flex-row items-center gap-2 border-2 border-white text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-all duration-200 hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full sm:w-auto justify-center"
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${quote.quote}" - ${quote.author}`)}`}
             target="_blank"
             rel="noopener noreferrer"
