@@ -52,7 +52,7 @@ function App() {
 
   // Render the quote and buttons
   return (
-    <div className="fixed inset-0 min-h-screen w-full flex items-center justify-center overflow-hidden" style={{ zIndex: 0 }}>
+    <div className="fixed inset-0 min-h-screen w-full flex items-center justify-center" style={{ zIndex: 0 }}>
       {/* Aurora as animated background */}
       <div className="absolute inset-0 -z-10">
         <Aurora
@@ -72,10 +72,10 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="md:container mx-auto px-2 sm:px-4 flex flex-wrap grid grid-row-3 gap-2 sm:gap-4 w-full max-w-full sm:max-w-2xl">
+            <div className="md:container mx-auto px-2 sm:px-4 flex flex-col gap-2 sm:gap-4 w-full max-w-full sm:max-w-2xl py-4">
               <SplitText
                 text={quote.quote}
-                className="text-2xl sm:text-4xl md:text-6xl font-semibold text-center justify-center-safe mb-2 sm:mb-4"
+                className="break-words text-2xl sm:text-4xl md:text-6xl font-semibold text-center justify-center-safe mb-2 sm:mb-4 leading-normal md:leading-[1.15]"
                 delay={20}
                 duration={0.6}
                 ease="power3.out"
@@ -105,7 +105,7 @@ function App() {
           {/* Stroke (outline) design for Share */}
           <a
             id="tweet-quote"
-            className="flex flex-row items-center gap-2 border-2 border-white text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-all duration-200 hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full sm:w-auto justify-center"
+            className="flex flex-row items-center gap-2 border-1 border-white text-white font-bold py-2 px-4 sm:px-6 rounded-full transition-all duration-200 hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full sm:w-auto justify-center"
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${quote.quote}" - ${quote.author}`)}`}
             target="_blank"
             rel="noopener noreferrer"
